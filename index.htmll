@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fdfaf3;
+            --card-bg: #ffffff;
+            --text-color: #7a635a;
+            --accent-pink: #f8d7da;
+            --accent-purple: #e2d5f1;
+            --accent-orange: #ffe5d9;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fef9e7 0%, #fdf2f2 100%);
+            font-family: 'Quicksand', sans-serif;
+            color: var(--text-color);
+            overflow: hidden;
+        }
+
+        /* Floating background hearts effect */
+        .bg-heart {
+            position: absolute;
+            color: rgba(255, 182, 193, 0.3);
+            font-size: 2rem;
+            z-index: -1;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(20deg); }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            text-align: center;
+            border: 8px solid #f2f2f2;
+            position: relative;
+        }
+
+        .screen { display: none; animation: fadeIn 0.5s ease-in-out; }
+        .active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 { font-family: 'Dancing Script', cursive; font-size: 2.5rem; margin-bottom: 10px; }
+        p { line-height: 1.6; font-size: 1.1rem; }
+
+        .btn {
+            background: #d9cad1;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 25px;
+            color: #5a4a42;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.2s;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .btn:active { transform: scale(0.95); }
+
+        .character-img { width: 120px; margin-bottom: 15px; }
+
+        /* Style for the "Tap each one" buttons */
+        .reveal-box {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 50px;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box-1 { background: var(--accent-orange); }
+        .box-2 { background: var(--accent-pink); }
+        .box-3 { background: var(--accent-purple); }
+
+        .hidden-text { display: none; }
+        
+        /* Final Letter Styling */
+        .letter-text {
+            text-align: left;
+            font-size: 0.95rem;
+            background: url('https://www.transparenttextures.com/patterns/pinstriped-suit.png');
+            padding: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-heart" style="top:10%; left:10%">❤️</div>
+    <div class="bg-heart" style="top:70%; right:15%">❤️</div>
+
+    <div class="container">
+        
+        <div class="screen active" id="s1">
+            <img src="https://media.tenor.com/T_7_S-V_Nf8AAAAi/milk-and-mocha-bear-crying.gif" class="character-img" alt="Crying bear">
+            <h1>Hey Cutiepie</h1>
+            <p>Can we talk for a moment? There's something important I want to tell you.</p>
+            <button class="btn" onclick="nextScreen(2)">Continue ❤️</button>
+        </div>
+
+        <div class="screen" id="s2">
+            <img src="https://media.tenor.com/ebvY1z96_V8AAAAi/mochi-peach-cat-crying.gif" class="character-img" alt="Sad cat">
+            <p>I know I hurt you... and I've been feeling bad about it.</p>
+            <button class="btn" onclick="nextScreen(3)">Next →</button>
+        </div>
+
+        <div class="screen" id="s3">
+            <h1 style="font-size: 1.8rem;">Little things I want to tell you...</h1>
+            <p style="font-size: 0.8rem;">Tap each one</p>
+            
+            <button class="reveal-box box-1" onclick="reveal(this, 'I messed up... and I\'m really sorry for that.')">❤️</button>
+            <button class="reveal-box box-2" onclick="reveal(this, 'I promise I\'ll be better for you.')">❤️</button>
+            <button class="reveal-box box-3" onclick="reveal(this, 'You mean so much to me.')">❤️</button>
+
+            <button class="btn" onclick="nextScreen(4)">My message →</button>
+        </div>
+
+        <div class="screen" id="s4">
+            <h1>I'm Sorry</h1>
+            <div class="letter-text">
+                <p>For hurting you and making you feel upset, I'm truly sorry. I never wanted to be the reason behind your tears or your silence.</p>
+                <p>You matter to me more than I always manage to show, and I hate that I let you down. I promise to grow, to listen, and to be better for you every single day.</p>
+                <p>Thank you for staying, for caring, and for being you. I'm really trying... and I hope you can forgive me.</p>
+            </div>
+            <button class="btn" onclick="location.reload()">Send Forgiveness ❤️</button>
+        </div>
+
+    </div>
+
+    <script>
+        function nextScreen(screenNum) {
+            // Hide all screens
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            // Show the requested screen
+            document.getElementById('s' + screenNum).classList.add('active');
+        }
+
+        function reveal(btn, text) {
+            btn.innerHTML = text;
+            btn.style.cursor = "default";
+        }
+    </script>
+</body>
+</html>
